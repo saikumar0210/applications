@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Motor Insurance Claim Form</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; display: flex; justify-content: center; padding: 40px 16px; }
+        .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 40px; width: 100%; max-width: 800px; }
+        h1 { font-size: 1.4rem; color: #1a202c; margin-bottom: 4px; }
+        .subtitle { color: #718096; font-size: 0.85rem; margin-bottom: 24px; }
+        .section-title { background: #1a202c; color: #fff; padding: 8px 14px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; margin: 24px 0 16px; border-radius: 4px; }
+        .row { display: flex; gap: 16px; flex-wrap: wrap; }
+        .form-group { flex: 1; min-width: 180px; margin-bottom: 14px; }
+        .form-group.full { flex: 100%; }
+        label { display: block; font-size: 0.8rem; font-weight: 600; color: #4a5568; margin-bottom: 4px; }
+        input, select, textarea { width: 100%; padding: 9px 12px; border: 1px solid #cbd5e0; border-radius: 6px; font-size: 0.9rem; color: #2d3748; background: #f7fafc; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #4299e1; background: #fff; }
+        textarea { resize: vertical; min-height: 80px; }
+        .checkbox-group { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
+        .checkbox-group label { font-weight: 400; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+        button[type="submit"] { width: 100%; padding: 12px; background: #3182ce; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+        button[type="submit"]:hover { background: #2b6cb0; }
+        .alert { margin-top: 24px; padding: 16px 20px; border-radius: 8px; font-size: 0.9rem; }
+        .alert.success { background: #c6f6d5; border-left: 4px solid #38a169; color: #276749; }
+        .alert.error { background: #fed7d7; border-left: 4px solid #e53e3e; color: #742a2a; }
+        .alert strong { display: block; margin-bottom: 6px; }
+        ul { padding-left: 18px; margin-top: 8px; }
+        ul li { margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>🚗 Motor Insurance Claim Form</h1>
+    <p class="subtitle">All submissions are logged to New Relic via AMS Monitoring Connector.</p>
+
+    <form method="post" action="/submit">
+
+        <!-- Header -->
+        <div class="row">
+            <div class="form-group"><label>Policy No</label><input type="text" name="policy_no" placeholder="POL-123456" /></div>
+            <div class="form-group"><label>Claim No</label><input type="text" name="claim_no" placeholder="CLM-123456" /></div>
+            <div class="form-group"><label>Vehicle No</label><input type="text" name="vehicle_no" placeholder="AP09AB1234" /></div>
+            <div class="form-group"><label>Engine No</label><input type="text" name="engine_no" placeholder="ENG123456" /></div>
+            <div class="form-group"><label>Chassis No</label><input type="text" name="chassis_no" placeholder="CHS123456" /></div>
+        </div>
+
+        <!-- Insured Details -->
+        <div class="section-title">INSURED DETAILS</div>
+        <div class="row">
+            <div class="form-group full"><label>Name</label><input type="text" name="insured_name" placeholder="John Doe" /></div>
+            <div class="form-group full"><label>Address</label><input type="text" name="insured_address" placeholder="123 Main St, City" /></div>
+            <div class="form-group"><label>Mobile No</label><input type="text" name="mobile_no" placeholder="9876543210" /></div>
+            <div class="form-group"><label>E-Mail Id</label><input type="text" name="email" placeholder="john@example.com" /></div>
+            <div class="form-group full"><label>Details of other existing Insurance policy (ies) in respect of this accident</label><input type="text" name="other_policies" placeholder="Optional" /></div>
+        </div>
+
+        <!-- Loss Details -->
+        <div class="section-title">LOSS DETAILS</div>
+        <div class="row">
+            <div class="form-group"><label>Date & Time of Accident/Occurrence</label><input type="datetime-local" name="accident_datetime" /></div>
+            <div class="form-group"><label>Place of Loss</label><input type="text" name="place_of_loss" placeholder="City, State" /></div>
+            <div class="form-group"><label>Estimated Cost of Repairs ($)</label><input type="number" name="estimated_cost" placeholder="5000" min="1" /></div>
+        </div>
+        <div class="form-group">
+            <label>Type of Loss</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="loss_type" value="Damage" /> Damage</label>
+                <label><input type="checkbox" name="loss_type" value="Theft" /> Theft</label>
+                <label><input type="checkbox" name="loss_type" value="Third Party" /> Third Party</label>
+            </div>
+        </div>
+        <div class="form-group full" style="margin-top:14px;">
+            <label>Short Description of Accident/Incident</label>
+            <textarea name="accident_description" placeholder="Describe what happened..."></textarea>
+        </div>
+
+        <!-- Driver Details -->
+        <div class="section-title">DRIVER DETAILS</div>
+        <div class="row">
+            <div class="form-group"><label>Driver Name</label><input type="text" name="driver_name" placeholder="John Doe" /></div>
+            <div class="form-group"><label>Age</label><input type="number" name="driver_age" placeholder="30" min="18" max="100" /></div>
+        </div>
+        <div class="form-group">
+            <label>Is Driver</label>
+            <div class="checkbox-group">
+                <label><input type="radio" name="driver_type" value="Owner" /> Owner</label>
+                <label><input type="radio" name="driver_type" value="Paid Driver" /> Paid Driver</label>
+                <label><input type="radio" name="driver_type" value="Relative/Friend" /> Relative/Friend</label>
+            </div>
+        </div>
+        <div class="row" style="margin-top:14px;">
+            <div class="form-group"><label>Driving License No</label><input type="text" name="license_no" placeholder="DL1234567890" /></div>
+            <div class="form-group"><label>Valid Up to</label><input type="date" name="license_valid_upto" /></div>
+            <div class="form-group"><label>Authorised to Drive</label><input type="text" name="authorised_to_drive" placeholder="Vehicle type" /></div>
+            <div class="form-group"><label>Issuing Authority</label><input type="text" name="issuing_authority" placeholder="RTO Office" /></div>
+        </div>
+
+        <!-- Additional Details -->
+        <div class="section-title">ADDITIONAL DETAILS IN CASE OF COMMERCIAL VEHICLES</div>
+        <div class="row">
+            <div class="form-group"><label>Permit No</label><input type="text" name="permit_no" placeholder="PRM123" /></div>
+            <div class="form-group"><label>Valid Up to</label><input type="date" name="permit_valid_upto" /></div>
+            <div class="form-group"><label>Issuing Authority</label><input type="text" name="permit_issuing_authority" placeholder="RTO Office" /></div>
+        </div>
+        <div class="row">
+            <div class="form-group"><label>Fitness Certificate Valid Up to</label><input type="date" name="fitness_valid_upto" /></div>
+            <div class="form-group"><label>No. of fare paying Passengers carried</label><input type="number" name="passengers_carried" placeholder="0" min="0" /></div>
+            <div class="form-group"><label>Weight and Nature of Goods Carried</label><input type="text" name="goods_carried" placeholder="e.g. 500kg Electronics" /></div>
+            <div class="form-group"><label>GR/LR No</label><input type="text" name="gr_lr_no" placeholder="GR123" /></div>
+        </div>
+
+        <!-- Injury/Death Details -->
+        <div class="section-title">INJURY/DEATH DETAILS & POLICE REPORT</div>
+        <div class="row">
+            <div class="form-group">
+                <label>Police Report Lodged</label>
+                <div class="checkbox-group">
+                    <label><input type="radio" name="police_report_lodged" value="Yes" /> Yes</label>
+                    <label><input type="radio" name="police_report_lodged" value="No" /> No</label>
+                </div>
+            </div>
+            <div class="form-group"><label>FIR/GD No</label><input type="text" name="fir_no" placeholder="FIR123" /></div>
+            <div class="form-group"><label>Police Station Name</label><input type="text" name="police_station" placeholder="Station Name" /></div>
+        </div>
+        <div class="form-group">
+            <label>Death/Injury to any occupant / Third Party (others) and/or Third Party Property Damage</label>
+            <div class="checkbox-group">
+                <label><input type="radio" name="death_injury" value="Yes" /> Yes</label>
+                <label><input type="radio" name="death_injury" value="No" /> No</label>
+            </div>
+        </div>
+        <div class="form-group full" style="margin-top:14px;">
+            <label>Details in case of Death and/or Injury to Third Party/Occupants/Driver or damage to property</label>
+            <textarea name="injury_details" placeholder="Provide details if applicable..."></textarea>
+        </div>
+
+        <button type="submit">Submit Claim</button>
+    </form>
+
+    {% if result is not none %}
+        {% if result.success %}
+        <div class="alert success">
+            <strong>✅ Claim Submitted Successfully!</strong>
+            Your claim has been received and logged to New Relic.
+        </div>
+        {% else %}
+        <div class="alert error">
+            <strong>❌ Submission Failed</strong>
+            {% if result.errors %}
+            <ul>
+                {% for error in result.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            Failed to log to New Relic. Please check your license key.
+            {% endif %}
+        </div>
+        {% endif %}
+    {% endif %}
+</div>
+</body>
+</html>
